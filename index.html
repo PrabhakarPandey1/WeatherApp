@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Weather App</title>
+</head>
+<body>
+    <div class="container">
+        <div class="left">
+            <div class="left-upper">
+                <div class="day">
+                    <h3 class="day-name">Tuesday</h3>
+                    <p class="day-date"></p>
+                </div>
+                <div class="loc">
+                    <p class="loc-name"></p>
+                    <i class="fa-solid fa-location-pin"></i>
+                    <p class="country"></p>
+                </div>
+            </div>
+            
+            <div class="left-bottom">
+                <div class="weather-img">
+                    <img src="sun.png" alt="Sun image" class="weather">
+                </div>
+                <div>
+                    <p class="temp">20&deg;c</p>
+                </div>
+                <div>
+                    <p class="curr-we">Sunny</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="right">
+            <div class="right-upper">
+                <div class="right-upper-det">
+                    <div>
+                        <p class="sea">SEA LEVEL</p>
+                    </div>
+                    <div>
+                        <p class="sea-level"></p>
+                    </div>
+                </div>
+                <div class="right-upper-det">
+                    <div>
+                        <p class="humid">HUMIDITY</p>
+                    </div>
+                    <div>
+                        <p class="humid-percent"></p>
+                    </div>
+                </div>
+                <div class="right-upper-det">
+                    <div>
+                        <p class="wind">WIND</p>
+                    </div>
+                    <div>
+                        <p class="wind-speed"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="right-middle">
+                <div class="card">
+                    <div>
+                        <img src="sun.png" alt="" class="card-img">
+                    </div>
+                    <div>
+                        <p class="para-1">Tue</p>
+                    </div>
+                    <div>
+                        <p class="para-2">30&deg;c</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <img src="sun.png" alt="" class="card-img-1">
+                    </div>
+                    <div>
+                        <p class="para-1-F">Tue</p>
+                    </div>
+                    <div>
+                        <p class="para-F">30&deg;c</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <img src="sun.png" alt="" class="card-img-2">
+                    </div>
+                    <div>
+                        <p class="para-1-S">Tue</p>
+                    </div>
+                    <div>
+                        <p class="para-S">30&deg;c</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <img src="sun.png" alt="" class="card-img-3">
+                    </div>
+                    <div>
+                        <p class="para-1-T">Tue</p>
+                    </div>
+                    <div>
+                        <p class="para-T">30&deg;c</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="right-bottom">
+                <div class="location">
+                    
+                </div>
+                <div class="change-div">
+                    <p class="change"></p>
+                </div>
+                <form >
+ 
+                        <input type="text" placeholder="Change Location" class="guilty" required>
+                    
+                    <button class="local-btn">Change</button>
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
