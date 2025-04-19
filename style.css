@@ -22,7 +22,7 @@ form{
 .local-btn{
     padding: 10px;
 }
-.guilty{
+.changeLocation{
     padding: 20px;
     width: 100%;
     display: flex;
@@ -36,7 +36,7 @@ form{
     background: linear-gradient(0.05turn, #A5BFCC,#0A3981) ;
     
 }
-.guilty::placeholder{
+.changeLocation::placeholder{
     color: #fff;
 }
 .container{
@@ -138,30 +138,3 @@ form{
 .para-1,.para-1-F,.para-1-S,.para-1-T{
     font-size: 10px;
 }
-/* .right-bottom{
-    
-    padding: 10px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    gap: 10px;
-    border-radius: 5px;
-    background: linear-gradient(0.05turn, #A5BFCC,#0A3981) ;
-    .location{
-        img{
-            width: 30px;
-            height: 30px;
-            object-fit: cover;
-        }
-    }
-    p{
-        font-size: 20px;
-    }
-}
-.right-bottom:hover{
-    cursor: pointer;
-    Color:#000;
-    background: linear-gradient(0.05turn, #0A3981,#D9EAFD) ;
-} */
