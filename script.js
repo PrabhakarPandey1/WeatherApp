@@ -23,108 +23,162 @@ const date = document.querySelector(".day-date");
 const day = document.querySelector(".day-name");
 const country = document.querySelector(".country");
 const state = document.querySelector(".state");
-const cardDay = document.querySelector(".para-1")
-const cardDayF = document.querySelector(".para-1-F")
-const cardDayS = document.querySelector(".para-1-S")
-const cardDayT= document.querySelector(".para-1-T")
-const cardCelcius = document.querySelector(".para-2")
-const cardCelciusF = document.querySelector(".para-F")
-const cardCelciusS = document.querySelector(".para-S")
-const cardCelciusT = document.querySelector(".para-T")
+const cardDay = document.querySelector(".para-1");
+const cardDayF = document.querySelector(".para-1-F");
+const cardDayS = document.querySelector(".para-1-S");
+const cardDayT = document.querySelector(".para-1-T");
+const cardCelcius = document.querySelector(".para-2");
+const cardCelciusF = document.querySelector(".para-F");
+const cardCelciusS = document.querySelector(".para-S");
+const cardCelciusT = document.querySelector(".para-T");
 
-let query = "gaya";
+let query = "Darbhanga";
 
 async function weatherApp(query) {
-    let apiKey = "66a4dd205ee7790fe257bd6b6f429f27";
-    let api = `https://api.openweathermap.org/data/2.5/forecast?q=${query}&appid=${apiKey}&units=metric`
+  let apiKey = "66a4dd205ee7790fe257bd6b6f429f27";
+  let api = `https://api.openweathermap.org/data/2.5/forecast?q=${query}&appid=${apiKey}&units=metric`;
 
-    try {
-        let response = await fetch(api);
+  let imageKey = "JVDBkRf52zNUdYIH6P1pItNR8gQBuNT2GaxIqsgYVqE8HgbGHauHDkzY";
 
-        if (response.ok) {
-            let data = await response.json();
-            console.log(data)
+  const leftSection = document.querySelector(".left");
 
-            const countryCode = (code) => {
-                const regionNamesInEnglish = new Intl.DisplayNames(["en"], { type: "region" });
-                return regionNamesInEnglish.of(code);
-            };
+  let imageApi = `https://api.pexels.com/v1/search?query=${query}&per_page=2`;
 
-            locName.textContent = query;
-            humidPercent.textContent = data.list[0].main.humidity + "%";
-            tempeRature.innerHTML = data.list[0].main.temp + "&deg;c";
-            windSpeed.textContent = data.list[0].wind.speed + "km/hr";
-            seaLevel.textContent = data.list[0].main.sea_level + "m";
-            currentWeather.textContent = data.list[0].weather[0].main;
-            country.textContent = countryCode(data.city.country);
+  let imageResponse = await fetch(imageApi, {
+    headers: {
+      Authorization: imageKey,
+    },
+  });
 
+  if (imageResponse.ok) {
+    let imageData = await imageResponse.json();
+    if (imageData.photos.length > 0) {
+      let imgUrl = imageData.photos[0].src.landscape;
 
-            //--card Days --
-            cardDay.textContent =  data.list[9].dt_txt.split(" ")[0];
-            cardDayF.textContent = data.list[18].dt_txt.split(" ")[0];
-            cardDayS.textContent = data.list[27].dt_txt.split(" ")[0];
-            cardDayT.textContent = data.list[36].dt_txt.split(" ")[0];
-            
+      leftSection.style.opacity = 0;
 
-            //--card Celcius--
-            cardCelcius.innerHTML = data.list[9].main.temp + "&deg;c";
-            cardCelciusF.innerHTML = data.list[18].main.temp + "&deg;c";
-            cardCelciusS.innerHTML = data.list[27].main.temp + "&deg;c";
-            cardCelciusT.innerHTML = data.list[36].main.temp + "&deg;c";
-
-            const dateObject = new Date();
-            date.innerHTML = dateObject.toLocaleDateString();
-            day.innerHTML = new Date().toLocaleString("en-US", { weekday: "long" });
-
-            if (data.list[0].weather[0].main == "Clouds") weatherIcon.src = "./image/cloudy.png";
-            else if (data.list[0].weather[0].main == "Clear") weatherIcon.src = "./image/clear.png";
-            else if (data.list[0].weather[0].main == "Rain") weatherIcon.src = "./image/heavy-rain.png";
-            else if (data.list[0].weather[0].main == "Drizzle") weatherIcon.src = "./image/drizzle.png";
-            else if (data.list[0].weather[0].main == "Mist") weatherIcon.src = "./image/mist.png";
-            else if (data.list[0].weather[0].main == "Haze") weatherIcon.src = "./image/hage.png";
-
-            if (data.list[8].weather[0].main == "Clouds") cardImg.src = "./image/cloudy.png";
-            else if (data.list[8].weather[0].main == "Clear") cardImg.src = "./image/clear.png";
-            else if (data.list[8].weather[0].main == "Rain") cardImg.src = "./image/heavy-rain.png";
-            else if (data.list[8].weather[0].main == "Drizzle") cardImg.src = "./image/drizzle.png";
-            else if (data.list[8].weather[0].main == "Mist") cardImg.src = "./image/mist.png";
-            else if (data.list[8].weather[0].main == "Haze") cardImg.src = "./image/hage.png";
-
-            if (data.list[16].weather[0].main == "Clouds") cardImgF.src = "./image/cloudy.png";
-            else if (data.list[16].weather[0].main == "Clear") cardImgF.src = "./image/clear.png";
-            else if (data.list[16].weather[0].main == "Rain") cardImgF.src = "./image/heavy-rain.png";
-            else if (data.list[16].weather[0].main == "Drizzle") cardImgF.src = "./image/drizzle.png";
-            else if (data.list[16].weather[0].main == "Mist") cardImgF.src = "./image/mist.png";
-            else if (data.list[16].weather[0].main == "Haze") cardImgF.src = "./image/hage.png";
-
-            if (data.list[24].weather[0].main == "Clouds") cardImgS.src = "./image/cloudy.png";
-            else if (data.list[24].weather[0].main == "Clear") cardImgS.src = "./image/clear.png";
-            else if (data.list[24].weather[0].main == "Rain") cardImgS.src = "./image/heavy-rain.png";
-            else if (data.list[24].weather[0].main == "Drizzle") cardImgS.src = "./image/drizzle.png";
-            else if (data.list[24].weather[0].main == "Mist") cardImgS.src = "./image/mist.png";
-            else if (data.list[24].weather[0].main == "Haze") cardImgS.src = "./image/hage.png";
-
-            if (data.list[32].weather[0].main == "Clouds") cardImgT.src = "./image/cloudy.png";
-            else if (data.list[32].weather[0].main == "Clear") cardImgT.src = "./image/clear.png";
-            else if (data.list[32].weather[0].main == "Rain") cardImgT.src = "./image/heavy-rain.png";
-            else if (data.list[32].weather[0].main == "Drizzle") cardImgT.src = "./image/drizzle.png";
-            else if (data.list[32].weather[0].main == "Mist") cardImgT.src = "./image/mist.png";
-            else if (data.list[32].weather[0].main == "Haze") cardImgT.src = "./image/hage.png";
-
-
-        } else {
-            alert("City not found!");
-        }
-    } catch (error) {
-        alert("An error occurred while fetching the weather data.");
+        setTimeout(() => {
+            leftSection.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${imgUrl})`;
+            leftSection.style.opacity = 1;
+        }, 200);
     }
+  }
+
+  try {
+    let response = await fetch(api);
+
+    if (response.ok) {
+      let data = await response.json();
+      console.log(data);
+
+      const countryCode = (code) => {
+        const regionNamesInEnglish = new Intl.DisplayNames(["en"], {
+          type: "region",
+        });
+        return regionNamesInEnglish.of(code);
+      };
+
+      locName.textContent = query;
+      humidPercent.textContent = data.list[0].main.humidity + "%";
+      tempeRature.innerHTML = data.list[0].main.temp + "&deg;c";
+      windSpeed.textContent = data.list[0].wind.speed + "km/hr";
+      seaLevel.textContent = data.list[0].main.sea_level + "m";
+      currentWeather.textContent = data.list[0].weather[0].main;
+      country.textContent = countryCode(data.city.country);
+
+      //--card Days --
+      cardDay.textContent = data.list[9].dt_txt.split(" ")[0];
+      cardDayF.textContent = data.list[18].dt_txt.split(" ")[0];
+      cardDayS.textContent = data.list[27].dt_txt.split(" ")[0];
+      cardDayT.textContent = data.list[36].dt_txt.split(" ")[0];
+
+      //--card Celcius--
+      cardCelcius.innerHTML = data.list[9].main.temp + "&deg;c";
+      cardCelciusF.innerHTML = data.list[18].main.temp + "&deg;c";
+      cardCelciusS.innerHTML = data.list[27].main.temp + "&deg;c";
+      cardCelciusT.innerHTML = data.list[36].main.temp + "&deg;c";
+
+      const dateObject = new Date();
+      date.innerHTML = dateObject.toLocaleDateString();
+      day.innerHTML = new Date().toLocaleString("en-US", { weekday: "long" });
+
+      if (data.list[0].weather[0].main == "Clouds")
+        weatherIcon.src = "./image/cloudy.png";
+      else if (data.list[0].weather[0].main == "Clear")
+        weatherIcon.src = "./image/clear.png";
+      else if (data.list[0].weather[0].main == "Rain")
+        weatherIcon.src = "./image/heavy-rain.png";
+      else if (data.list[0].weather[0].main == "Drizzle")
+        weatherIcon.src = "./image/drizzle.png";
+      else if (data.list[0].weather[0].main == "Mist")
+        weatherIcon.src = "./image/mist.png";
+      else if (data.list[0].weather[0].main == "Haze")
+        weatherIcon.src = "./image/hage.png";
+
+      if (data.list[8].weather[0].main == "Clouds")
+        cardImg.src = "./image/cloudy.png";
+      else if (data.list[8].weather[0].main == "Clear")
+        cardImg.src = "./image/clear.png";
+      else if (data.list[8].weather[0].main == "Rain")
+        cardImg.src = "./image/heavy-rain.png";
+      else if (data.list[8].weather[0].main == "Drizzle")
+        cardImg.src = "./image/drizzle.png";
+      else if (data.list[8].weather[0].main == "Mist")
+        cardImg.src = "./image/mist.png";
+      else if (data.list[8].weather[0].main == "Haze")
+        cardImg.src = "./image/hage.png";
+
+      if (data.list[16].weather[0].main == "Clouds")
+        cardImgF.src = "./image/cloudy.png";
+      else if (data.list[16].weather[0].main == "Clear")
+        cardImgF.src = "./image/clear.png";
+      else if (data.list[16].weather[0].main == "Rain")
+        cardImgF.src = "./image/heavy-rain.png";
+      else if (data.list[16].weather[0].main == "Drizzle")
+        cardImgF.src = "./image/drizzle.png";
+      else if (data.list[16].weather[0].main == "Mist")
+        cardImgF.src = "./image/mist.png";
+      else if (data.list[16].weather[0].main == "Haze")
+        cardImgF.src = "./image/hage.png";
+
+      if (data.list[24].weather[0].main == "Clouds")
+        cardImgS.src = "./image/cloudy.png";
+      else if (data.list[24].weather[0].main == "Clear")
+        cardImgS.src = "./image/clear.png";
+      else if (data.list[24].weather[0].main == "Rain")
+        cardImgS.src = "./image/heavy-rain.png";
+      else if (data.list[24].weather[0].main == "Drizzle")
+        cardImgS.src = "./image/drizzle.png";
+      else if (data.list[24].weather[0].main == "Mist")
+        cardImgS.src = "./image/mist.png";
+      else if (data.list[24].weather[0].main == "Haze")
+        cardImgS.src = "./image/hage.png";
+
+      if (data.list[32].weather[0].main == "Clouds")
+        cardImgT.src = "./image/cloudy.png";
+      else if (data.list[32].weather[0].main == "Clear")
+        cardImgT.src = "./image/clear.png";
+      else if (data.list[32].weather[0].main == "Rain")
+        cardImgT.src = "./image/heavy-rain.png";
+      else if (data.list[32].weather[0].main == "Drizzle")
+        cardImgT.src = "./image/drizzle.png";
+      else if (data.list[32].weather[0].main == "Mist")
+        cardImgT.src = "./image/mist.png";
+      else if (data.list[32].weather[0].main == "Haze")
+        cardImgT.src = "./image/hage.png";
+    } else {
+      alert("City not found!");
+    }
+  } catch (error) {
+    alert("An error occurred while fetching the weather data.");
+  }
 }
 
 weatherApp(query);
 
 localBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    changeLoc.style.display = "none";
-    query = localInput.value;
-    weatherApp(query);
+  e.preventDefault();
+  changeLoc.style.display = "none";
+  query = localInput.value;
+  weatherApp(query);
 });

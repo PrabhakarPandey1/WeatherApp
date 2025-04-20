@@ -56,13 +56,17 @@ form{
     color: #fff;
     flex: 1;
     border-radius: 10px;
-    background-image: url(beach.jpg);
+    transition: opacity 0.5s ease-in-out;
+    opacity: 1;
     display: flex;
     height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
     flex-direction: column;
     justify-content: space-between;
+    background-size: cover;
     background-position: center;
 }
+
 
 .left-upper{
     gap:10px;
